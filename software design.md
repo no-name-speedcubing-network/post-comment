@@ -15,7 +15,8 @@ root: /media_api/;
     "id": 345624,
     "topics": ["developer", "code", "money"],
     "body": "......",
-    "images": ["fwd2hi4h3", "hufei724h2h3"]
+    "images": ["fwd2hi4h3", "hufei724h2h3"],
+    "timestamp": "utc-time"
   }
   ```
 
@@ -25,6 +26,18 @@ root: /media_api/;
     "user_id": 291419, 
     "post_id": 43253,
     "id": 324,
-    "body": "......" 
+    "body": "......",
+    "timestamp": "utc-time"
+  }
+  ```
+
+  ###### likes 
+  ```json
+  {
+    "user_id": 291419,
+    "post_id": 43253,
+    "comment_id": 253,
+    "like": 1,
+    "timestamp": "utc-time"
   }
   ```
