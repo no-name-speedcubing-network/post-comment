@@ -1,7 +1,7 @@
 ### service responsibilities
 
 ### db
-  ###### post
+  ###### post-comment
   ```json
   {
     "user_id": 291419, 
@@ -9,17 +9,18 @@
     "topics": ["developer", "code", "money"],
     "body": "......",
     "images": ["fwd2hi4h3", "hufei724h2h3"],
-    "upload_time": Timestamp(1531456567, 1)
-  }
-  ```
-
-  ###### comment
-  ```json
-  {
-    "user_id": 2919,
-    "post_id": 43,
-    "id": 324,
-    "body": "......", 
-    "timestamp": Timestamp(1531456567, 1)
+    "upload_time": Timestamp(1531456567, 1),
+    "comments": [{
+      "user_id": 2919,
+      "id": 1,
+      "body": "......", 
+      "timestamp": Timestamp(15314565367, 1)
+      },
+      {
+      "user_id": 2919,
+      "id": 2,
+      "body": "......", 
+      "timestamp": Timestamp(1531456523, 1)
+      }]
   }
   ```
