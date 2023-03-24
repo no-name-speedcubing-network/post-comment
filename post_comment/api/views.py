@@ -17,19 +17,19 @@ posts_collection = testdb['posts']
 class PostView(APIView):
 
     def get(self, request, pk):
-        post = posts_collection.find({'_id': ObjectId(pk)})
-
-        if post:
-            for item in post:
-                resp = {'post': [{'user_id': item['user_id']}, {'topics': item['topics']},
-                                 {'body': item['body']}, {'upload_time': str(item['upload_time'])}]}
+        try:
+            post = posts_collection.find_one({'_id': ObjectId(pk)})
+            if post:
+                resp = {'post': [{'topics': post['topics'],
+                                 'body': post['body'], 'upload_time': str(post['upload_time'])}]}
                 return Response(resp, status=status.HTTP_200_OK)
-        else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            else:
+                return Response({'error': 'Post not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        except Exception as e:
+            return Response({'error': 'Internal server error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def post(self, request):
-        print(request.body)
-
         schema = {
             'topics': {
                 'type': 'list',
@@ -41,10 +41,6 @@ class PostView(APIView):
                 'type': 'string',
                 'required': True
             },
-            'user_id': {
-                'type': 'integer',
-                'required': True
-            },
             'upload_time': {
                 'required': True
             }
@@ -52,9 +48,9 @@ class PostView(APIView):
 
         v = Validator(schema)
 
+        print(type(request.body))
         data = json.loads(request.body.decode('utf-8'))
 
-        data['user_id'] = 21
         data['upload_time'] = datetime.utcnow()
 
         if v.validate(data):
